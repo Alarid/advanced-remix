@@ -2,6 +2,15 @@
 
 ## 📝 Notes
 
+We can use a fetcher to fetch data from a resource route. Usually it's not
+recommended to import a component from a resource route, but in this case it
+allows us to collocate the code of the component that does the fetching request
+with the backend code that does the actual fetching.
+
+The action should be specified for this fetch, otherwise it will be defaulted to
+the current route, which means we would need to have a loader to handle this
+fetch in every route that use the component.
+
 ## 🤓 Background
 
 Picture this: a React component that handles the whole experience of fetching
