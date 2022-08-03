@@ -2,6 +2,10 @@
 
 ## 📝 Notes
 
+We can use the `fetcher.submission` to know if there is a current form
+submission using this fetcher. If that is the case, we can use the form data
+from this submission to apply optimistic update to our UI instantly.
+
 ## 🤓 Background
 
 Continuing with the twitter example in the last exercise, when you click

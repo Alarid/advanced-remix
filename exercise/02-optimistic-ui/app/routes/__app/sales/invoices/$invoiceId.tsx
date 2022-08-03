@@ -1,3 +1,4 @@
+import React from "react";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
@@ -152,22 +153,36 @@ export default function InvoiceRoute() {
 function Deposits() {
   const data = useLoaderData<typeof loader>();
   const newDepositFetcher = useFetcher();
-  // 🐨 create a ref for the form (so we can reset it once the submission is finished)
 
-  // 🐨 create a deposits array that includes the user's submission
-  // 💰 you can get the user's submission via newDepositFetcher.submission
-  // 💰 you can convert the depositDate to a Date object via parseDate and then use toLocaleDateString()
+  const formRef = React.useRef<HTMLFormElement>(null);
 
-  // 🐨 add a useEffect that resets the form when the submission is finished
-  // 💰 (newDepositFetcher.type === "done")
+  const deposits = [...data.deposits];
+  if (newDepositFetcher.submission) {
+    const formAmount = Number(
+      newDepositFetcher.submission.formData.get("amount"),
+    );
+    const formDepositDate =
+      newDepositFetcher.submission.formData.get("depositDate");
+    if (typeof formAmount === "number" && typeof formDepositDate === "string") {
+      deposits.push({
+        id: "new",
+        amount: formAmount,
+        depositDateFormatted: parseDate(formDepositDate).toLocaleDateString(),
+      });
+    }
+  }
+
+  React.useEffect(() => {
+    if (newDepositFetcher.type === "done" && formRef.current) {
+      formRef.current.reset();
+    }
+  }, [newDepositFetcher.type]);
 
   return (
     <div>
       <div className="font-bold leading-8">Deposits</div>
-      {/* 🐨 swap this for your optimistic deposits array */}
-      {data.deposits.length > 0 ? (
-        // 🐨 swap this for your optimistic deposits array
-        data.deposits.map((deposit) => (
+      {deposits.length > 0 ? (
+        deposits.map((deposit) => (
           <div key={deposit.id} className={lineItemClassName}>
             <Link
               to={`../../deposits/${deposit.id}`}
@@ -185,6 +200,7 @@ function Deposits() {
         method="post"
         className="grid grid-cols-1 gap-x-4 gap-y-2 lg:grid-cols-2"
         // 🐨 add your form ref here
+        ref={formRef}
       >
         <div className="min-w-[100px]">
           <div className="flex flex-wrap items-center gap-1">
