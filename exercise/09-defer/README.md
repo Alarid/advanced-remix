@@ -2,6 +2,10 @@
 
 ## 📝 Notes
 
+A loader can return a promise (without awaiting it) using `defer`. This will
+stream the data to the client, but it requires React 18. Also, the client must
+use `<Suspense>` and `<Await>` to read the stream.
+
 ## 🤓 Background
 
 Sometimes, it's not our customer's Network connection that's the problem, but
