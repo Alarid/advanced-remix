@@ -195,15 +195,15 @@ function Deposits() {
     if (!formRef.current) return;
     if (newDepositFetcher.type !== "done") return;
 
-    // 🐨 If there's an error on the amount, focus the amount element
-
-    // 🐨 If there's an error on the desposit date, focus the depositDate element
-
-    // 🐨 Focus on the amount field
-    // 💯 In what situation would we want to *not* change focus and *not* reset the form at this point?
-
-    formRef.current.reset();
-  }, [newDepositFetcher.type]);
+    if (errors?.amount) {
+      formRef.current.elements.amount?.focus();
+    } else if (errors?.depositDate) {
+      formRef.current.elements.depositDate?.focus();
+    } else if (document.activeElement === formRef.current.elements.intent) {
+      formRef.current.reset();
+      formRef.current.elements.amount?.focus();
+    }
+  }, [errors, newDepositFetcher.type]);
 
   return (
     <div>

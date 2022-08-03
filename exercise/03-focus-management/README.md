@@ -2,6 +2,12 @@
 
 ## 📝 Notes
 
+It's a good practice to handle focus on a form differently, depending on the
+presence of errors, especially with optimistic UI in place. If there is an
+error, the form field concerned with this error should be focused. It there
+isn't, after the form is reset we should focus the first input, to facilitate
+multiple data entries in a row.
+
 ## 🤓 Background
 
 One of the benefits of having JavaScript on the page is we're able to help the
