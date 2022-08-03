@@ -1,9 +1,9 @@
 # 06. Imperative Mutations
 
-TODO: If you're reading this it means Kent didn't get around to fixing this
-exercise... Hopefully you're not reading this.
-
 ## 📝 Notes
+
+`useFetcher` is for making fetch request without a navigation, while `useSubmit`
+does a navigation. We can use both to make mutations without a form.
 
 ## 🤓 Background
 
