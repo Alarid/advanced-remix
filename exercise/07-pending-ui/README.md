@@ -2,6 +2,9 @@
 
 ## 📝 Notes
 
+`useTransition` allow us to know if there is a pending transition somewhere in
+the app
+
 ## 🤓 Background
 
 No matter how hard you try, you can't control your user's network and sometimes
