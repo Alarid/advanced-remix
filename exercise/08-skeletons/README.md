@@ -2,6 +2,10 @@
 
 ## 📝 Notes
 
+With Remix (and react router) we can add state to a navigation. This can be
+retrieved with `useTransition`, and used to render a custom skeleton with some
+data while the transition is loading / submitting.
+
 ## 🤓 Background
 
 A loading spinner is great... But we can improve that experience even further by
