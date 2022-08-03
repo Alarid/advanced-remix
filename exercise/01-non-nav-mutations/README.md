@@ -2,6 +2,9 @@
 
 ## 📝 Notes
 
+To avoid a change in the navigation using a form, we can instead use the form of
+a `fetcher` (retrieved from `useFetcher()`): `<fetcher.Form />`
+
 ## 🤓 Background
 
 From the beginning of the web, `<form>` has been how mutations were handled. The
