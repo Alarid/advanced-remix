@@ -1,5 +1,6 @@
 import type { LinksFunction, LoaderArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
+import type { ShouldReloadFunction } from "@remix-run/react";
 import {
   Links,
   LiveReload,
@@ -7,7 +8,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useFetcher,
   useLoaderData,
   useLocation,
   useSubmit,
@@ -37,6 +37,13 @@ export async function loader({ request }: LoaderArgs) {
     user: await getUser(request),
   });
 }
+
+export const unstable_shouldReload: ShouldReloadFunction = ({ submission }) => {
+  if (submission && ["/login", "/logout"].includes(submission.action)) {
+    return true;
+  }
+  return false;
+};
 
 export default function App() {
   const { user } = useLoaderData<typeof loader>();
@@ -119,6 +126,3 @@ function LogoutTimer() {
     </Dialog>
   );
 }
-
-// 🐨 Add unstable_shouldReload here and only reload the data if the transition
-// has a submission where the action is "/login" or "/logout"

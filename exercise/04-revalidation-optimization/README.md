@@ -2,6 +2,11 @@
 
 ## 📝 Notes
 
+Any route can export a function `unstable_shouldReload` (unstable for now, will
+become stable soon) to specify when a loader should be re-called or not. This
+allows us to prevent unnecessary server work (for example we don't need to
+refetch the user if something completely unrelated changed in the app)
+
 ## 🤓 Background
 
 Before JavaScript came around, any time you submitted a form, the browser would
